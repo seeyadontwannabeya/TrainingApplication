@@ -3,12 +3,12 @@
     <h3>Sign up</h3>
     <label for="email">E-mail</label>
     <div id="UserRow">
-      <input type="text" id="email" v-model="Email" />
+      <input type="email" id="email" v-model="Email" />
     </div>
     <br />
     <label for="password">Password</label>
     <div id="UserRow">
-      <input type="text" id="password" v-model="Password" />
+      <input type="password" id="password" v-model="Password" />
     </div>
     <br />
 

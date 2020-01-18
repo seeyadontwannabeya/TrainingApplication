@@ -9,14 +9,34 @@ using System.Web.Http.Cors;
 using System.Web.Http;
 using System.Web.Http.Description;
 using Trening.Models;
+using Trening.Library;
 
 namespace Trening.Controllers
 {
     [EnableCors(origins: "http://localhost:8080", headers: "*", methods: "*")]
     public class RegistrationsController : ApiController
     {
-
         private TreningEntities2 db = new TreningEntities2();
+        private LoginUtility loginUtil = new LoginUtility();
+        [Route("login")]
+        [HttpPost]
+        public AccessTokenViewModel Login(UserLoginModel userLogin)
+        {
+            var tokenString = loginUtil.Login(userLogin.username, userLogin.password);
+
+            if (tokenString != string.Empty)
+            {
+                var expireDate = DateTime.Now.AddHours(1);
+                db.accesstokens.Add(new accesstokens { token = tokenString, expires = expireDate, created = DateTime.Now });
+                db.SaveChanges();
+
+                return new AccessTokenViewModel { accessToken = tokenString, expireDate = expireDate };
+            }
+            else
+            {
+                return null;
+            }
+        }
 
         // GET: api/Registrations
         public IQueryable<Registration> GetRegistration()
@@ -80,6 +100,9 @@ namespace Trening.Controllers
             {
                 return BadRequest(ModelState);
             }
+            var password = registration.Password;
+            
+
 
             db.Registration.Add(registration);
             db.SaveChanges();

@@ -6,6 +6,10 @@
     <edmx:Diagrams>
       <Diagram DiagramId="24b63e818aa34a729d35121fb7207423" Name="Diagram1">
         <EntityTypeShape EntityType="TreningModel.Registration" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TreningModel.Application" Width="1.5" PointX="3.375" PointY="0.75" />
+        <EntityTypeShape EntityType="TreningModel.Message" Width="1.5" PointX="3.375" PointY="3.75" />
+        <EntityTypeShape EntityType="TreningModel.AdminMessage" Width="1.5" PointX="3.375" PointY="3.75" />
+        <EntityTypeShape EntityType="TreningModel.accesstokens" Width="1.5" PointX="5.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

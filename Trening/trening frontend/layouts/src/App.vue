@@ -23,6 +23,7 @@
               :disabled="userSignedIn"
               @click="goToPage('REGISTRATION')"
             >Registration</b-nav-item>
+            <b-nav-item href="#" :disabled="userSignedIn" @click="goToPage('CHAT')">Chat</b-nav-item>
           </b-navbar-nav>
 
           <!-- Right aligned nav items -->
@@ -37,7 +38,7 @@
               </b-nav-item-dropdown>
             </div>
             <div v-else>
-              <b-nav-item @click="signIn">Sign in/Sign up</b-nav-item>
+              <b-nav-item @click="goToPage('LOGIN')">Sign in/Sign up</b-nav-item>
             </div>
           </b-navbar-nav>
         </b-collapse>
@@ -82,6 +83,12 @@
       <div v-else-if="selectedPage === 'REGISTRATION'">
         <UserRegistration />
       </div>
+      <div v-else-if="selectedPage === 'CHAT'">
+        <Chat />
+      </div>
+      <div v-else-if="selectedPage === 'LOGIN'">
+        <Login />
+      </div>
     </div>
   </div>
 </template>
@@ -89,12 +96,16 @@
 <script>
 import ApplicationSec from "./ApplicationSec.vue";
 import UserRegistration from "./UserRegistration.vue";
+import Login from "./Login.vue";
+import Chat from "./Chat.vue";
 
 export default {
   name: "app",
   components: {
     ApplicationSec,
-    UserRegistration
+    UserRegistration,
+    Chat,
+    Login
   },
 
   data: function() {

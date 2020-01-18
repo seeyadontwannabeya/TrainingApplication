@@ -26,5 +26,9 @@ namespace Trening.Models
         }
     
         public virtual DbSet<Registration> Registration { get; set; }
+        public virtual DbSet<AdminMessage> AdminMessage { get; set; }
+        public virtual DbSet<Application> Application { get; set; }
+        public virtual DbSet<Message> Message { get; set; }
+        public virtual DbSet<accesstokens> accesstokens { get; set; }
     }
 }
