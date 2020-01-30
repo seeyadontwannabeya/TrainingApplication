@@ -16,7 +16,7 @@ namespace Trening.Controllers
     [EnableCors(origins: "http://localhost:8080", headers: "*", methods: "*")]
     public class RegistrationsController : ApiController
     {
-        private TreningEntities2 db = new TreningEntities2();
+        private TreningEntities db = new TreningEntities();
         private LoginUtility loginUtil = new LoginUtility();
         [Route("login")]
         [HttpPost]
@@ -39,27 +39,26 @@ namespace Trening.Controllers
         }
 
         // GET: api/Registrations
-        public IQueryable<Registration> GetRegistration()
+        public IQueryable<Login> GetRegistration()
         {
-            return db.Registration;
+            return db.Login;
         }
 
         // GET: api/Registrations/5
-        [ResponseType(typeof(Registration))]
+        [ResponseType(typeof(Login))]
         public IHttpActionResult GetRegistration(int id)
         {
-            Registration registration = db.Registration.Find(id);
+            Login registration = db.Login.Find(id);
             if (registration == null)
             {
                 return NotFound();
             }
-
             return Ok(registration);
         }
 
         // PUT: api/Registrations/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutRegistration(int id, Registration registration)
+        public IHttpActionResult PutRegistration(int id, Login registration)
         {
             if (!ModelState.IsValid)
             {
@@ -93,34 +92,56 @@ namespace Trening.Controllers
         }
 
         // POST: api/Registrations
-        [ResponseType(typeof(Registration))]
-        public IHttpActionResult PostRegistration(Registration registration)
+        [ResponseType(typeof(Login))]
+        public IHttpActionResult PostRegistration(Login registration)
         {
+            //var usr = new UserValues();
+            //usr.Login = new Login();
+            //usr.Login.Email = registration.Email;
+            //usr.Login.Pasword = registration.Pasword;
+            
+            //foreach (var obj in registration.UserValues)
+            //{
+            //    usr.Activityfactor = obj.Activityfactor;
+            //    usr.Age = obj.Age;
+            //    usr.Date = obj.Date;
+            //    usr.Height = obj.Height;
+            //    usr.ID = obj.ID;
+            //    usr.Weight = obj.Weight;
+            //    usr.Trainingexperience = "Hej";
+            //    usr.KcalResult = 123;
+            //    usr.Kcalplusminus = 123;
+ 
+                
+            //}
+            //Console.WriteLine(usr);
+            
+            //registration.UserValues[0]
+            //uservalues.LoginID = registration.ID;
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            var password = registration.Password;
-            
-
-
-            db.Registration.Add(registration);
+            db.Login.Add(registration);
+            //usr.Login = registration;
+            //Console.WriteLine(registration);
+            //db.UserValues.Add(usr);
             db.SaveChanges();
-
+            
             return CreatedAtRoute("DefaultApi", new { id = registration.ID }, registration);
         }
 
         // DELETE: api/Registrations/5
-        [ResponseType(typeof(Registration))]
+        [ResponseType(typeof(Login))]
         public IHttpActionResult DeleteRegistration(int id)
         {
-            Registration registration = db.Registration.Find(id);
+            Login registration = db.Login.Find(id);
             if (registration == null)
             {
                 return NotFound();
             }
 
-            db.Registration.Remove(registration);
+            db.Login.Remove(registration);
             db.SaveChanges();
 
             return Ok(registration);
@@ -137,7 +158,7 @@ namespace Trening.Controllers
 
         private bool RegistrationExists(int id)
         {
-            return db.Registration.Count(e => e.ID == id) > 0;
+            return db.Login.Count(e => e.ID == id) > 0;
         }
     }
 }

@@ -1,33 +1,28 @@
 <template>
-  <div id="UserRegistration">
-    <h3>Sign up</h3>
-    <label for="email">E-mail</label>
-    <div id="UserRow">
-      <input type="email" id="email" v-model="Email" />
-    </div>
-    <br />
-    <label for="password">Password</label>
-    <div id="UserRow">
-      <input type="password" id="password" v-model="Password" />
-    </div>
-    <br />
+  <div id="NutritionCalculator">
+    <h3>Nutrition Calculator</h3>
 
-    <div id="UserRow1"></div>
-    <input type="radio" value="male" id="male" v-model="Gender" />
-    <label for="male">Male</label>
-    <input type="radio" value="female" id="female" v-model="Gender" />
-    <label for="female">Female</label>
-    <br />
-    <label for="height">How tall are you?</label>
-    <div id="UserRow">
-      <input type="text" id="height" v-model="Height" />
-    </div>
     <br />
     <label for="age">Age?</label>
     <div id="UserRow">
       <input type="text" id="age" v-model="Age" />
     </div>
     <br />
+
+    <div id="UserRow1"></div>
+    <input type="radio" value="male" id="male" v-model="Gender" />
+    <label for="male">Male</label>
+
+    <input type="radio" value="female" id="female" v-model="Gender" />
+    <label for="female">Female</label>
+    <br />
+
+    <label for="height">How tall are you?</label>
+    <div id="UserRow">
+      <input type="text" id="height" v-model="Height" />
+    </div>
+    <br />
+
     <label for="weight">How much do you weigh?</label>
     <div id="UserRow">
       <input type="text" id="weight" v-model="Weight" />
@@ -46,10 +41,9 @@
         v-model="Activityfactor"
       />
     </div>
-    <button
-      type="submit"
-      @click="say(Email, Password, Gender, Age, Height, Weight, Activityfactor)"
-    >Submit</button>
+    <button type="submit" @click="say(Gender, Age, Height, Weight, Activityfactor)">Submit</button>
+    <br />
+    <span>Kcal: {{ KcalResult }}</span>
   </div>
 </template>
 
@@ -58,56 +52,43 @@ import axios from "axios";
 
 export default {
   methods: {
-    say: function(
-      Email,
-      Password,
-      Gender,
-      Age,
-      Height,
-      Weight,
-      Activityfactor
-    ) {
-      var userValues = [
-        {
-          Height: Height,
-          Gender: Gender,
-          Age: Age,
-          Weight: Weight,
-          Activityfactor: Activityfactor
-        }
-      ];
-      console.log(Email + Password);
+    say: function(Gender, Age, Height, Weight, Activityfactor) {
+      console.log(Gender + Age + Height + Weight + Activityfactor);
 
       axios
-        .post("https://localhost:44332/api/Registrations", {
-          Email: Email,
-          Pasword: Password,
-          userValues: userValues
+        .post("https://localhost:44368/api/CalcDatas", {
+          Gender: Gender,
+          Age: Age,
+          Height: Height,
+          Weight: Weight,
+          Activityfactor: Activityfactor
         })
         .then(response => {
           this.success = "Data saved successfully";
           this.response = JSON.stringify(response, null, 2);
+          this.KcalResult = response.data.KcalResult;
         })
         .catch(error => {
           this.response = "Error: " + error.response.status;
         });
     }
   },
-  name: "UserRegistration",
+  name: "NutritionCalculator",
 
   data: function() {
     return {
-      Email: "",
-      Password: ""
+      Gender: "",
+      Age: "",
+      Height: "",
+      Weight: "",
+      Activityfactor: "1.3",
+      KcalResult: ""
     };
   }
 };
 </script>
 <style>
-#UserRegistration {
+#NutritionCalculator {
   text-align: center;
-}
-.hejsan {
-  margin: 10px;
 }
 </style>

@@ -10,4 +10,5 @@ namespace Trening.Models
         public string accessToken { get; set; }
         public DateTime expireDate { get; set; }
     }
+
 }

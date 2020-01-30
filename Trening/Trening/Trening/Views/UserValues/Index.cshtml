@@ -1,0 +1,87 @@
+﻿@model IEnumerable<Trening.Models.UserValues>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Height)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Age)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Weight)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Activityfactor)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Trainingexperience)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.KcalResult)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Kcalplusminus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Login.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Login1.Email)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Height)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Age)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Weight)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Activityfactor)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Trainingexperience)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.KcalResult)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Kcalplusminus)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Login.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Login1.Email)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>

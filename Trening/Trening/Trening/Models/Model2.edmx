@@ -1,0 +1,366 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="TreningModel1.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="accesstokens">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="token" Type="varchar(max)" Nullable="false" />
+          <Property Name="expires" Type="datetime" Nullable="false" />
+          <Property Name="created" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CalcData">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Gender" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Height" Type="decimal" Precision="8" Scale="3" Nullable="false" />
+          <Property Name="Age" Type="int" Nullable="false" />
+          <Property Name="Weight" Type="decimal" Precision="8" Scale="3" Nullable="false" />
+          <Property Name="Activityfactor" Type="decimal" Precision="8" Scale="3" Nullable="false" />
+          <Property Name="Fat" Type="decimal" Precision="8" Scale="3" />
+          <Property Name="Carbs" Type="decimal" Precision="8" Scale="3" />
+          <Property Name="Protein" Type="decimal" Precision="8" Scale="3" />
+          <Property Name="KcalResult" Type="decimal" Precision="8" Scale="3" />
+          <Property Name="KcalPlusMinus" Type="decimal" Precision="8" Scale="3" />
+          <Property Name="created" Type="datetime" />
+          <Property Name="RegID" Type="int" />
+        </EntityType>
+        <EntityType Name="Chat">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Sender" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Reciever" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Message" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="created" Type="datetime" />
+          <Property Name="RegID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Login">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Pasword" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Trainingprogram">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TrainingExperience" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Trainingdays" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Goals" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Trainingprogram" Type="nvarchar" MaxLength="50" />
+          <Property Name="created" Type="datetime" />
+          <Property Name="RegID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserRegistration">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="created" Type="datetime" />
+        </EntityType>
+        <Association Name="FK_CalcData_UserRegistration">
+          <End Role="UserRegistration" Type="Self.UserRegistration" Multiplicity="0..1" />
+          <End Role="CalcData" Type="Self.CalcData" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserRegistration">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CalcData">
+              <PropertyRef Name="RegID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Chat_UserRegistration">
+          <End Role="UserRegistration" Type="Self.UserRegistration" Multiplicity="1" />
+          <End Role="Chat" Type="Self.Chat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserRegistration">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Chat">
+              <PropertyRef Name="RegID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Trainingprogram_UserRegistration">
+          <End Role="UserRegistration" Type="Self.UserRegistration" Multiplicity="1" />
+          <End Role="Trainingprogram" Type="Self.Trainingprogram" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserRegistration">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Trainingprogram">
+              <PropertyRef Name="RegID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TreningModel1StoreContainer">
+          <EntitySet Name="accesstokens" EntityType="Self.accesstokens" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CalcData" EntityType="Self.CalcData" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Chat" EntityType="Self.Chat" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Login" EntityType="Self.Login" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Trainingprogram" EntityType="Self.Trainingprogram" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserRegistration" EntityType="Self.UserRegistration" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_CalcData_UserRegistration" Association="Self.FK_CalcData_UserRegistration">
+            <End Role="UserRegistration" EntitySet="UserRegistration" />
+            <End Role="CalcData" EntitySet="CalcData" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Chat_UserRegistration" Association="Self.FK_Chat_UserRegistration">
+            <End Role="UserRegistration" EntitySet="UserRegistration" />
+            <End Role="Chat" EntitySet="Chat" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Trainingprogram_UserRegistration" Association="Self.FK_Trainingprogram_UserRegistration">
+            <End Role="UserRegistration" EntitySet="UserRegistration" />
+            <End Role="Trainingprogram" EntitySet="Trainingprogram" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TreningModel1" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="TreningEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="accesstokens" EntityType="TreningModel1.accesstokens" />
+          <EntitySet Name="CalcData" EntityType="TreningModel1.CalcData" />
+          <EntitySet Name="Chat" EntityType="TreningModel1.Chat" />
+          <EntitySet Name="Login" EntityType="TreningModel1.Login" />
+          <EntitySet Name="Trainingprogram" EntityType="TreningModel1.Trainingprogram" />
+          <EntitySet Name="UserRegistration" EntityType="TreningModel1.UserRegistration" />
+          <AssociationSet Name="FK_CalcData_UserRegistration" Association="TreningModel1.FK_CalcData_UserRegistration">
+            <End Role="UserRegistration" EntitySet="UserRegistration" />
+            <End Role="CalcData" EntitySet="CalcData" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Chat_UserRegistration" Association="TreningModel1.FK_Chat_UserRegistration">
+            <End Role="UserRegistration" EntitySet="UserRegistration" />
+            <End Role="Chat" EntitySet="Chat" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Trainingprogram_UserRegistration" Association="TreningModel1.FK_Trainingprogram_UserRegistration">
+            <End Role="UserRegistration" EntitySet="UserRegistration" />
+            <End Role="Trainingprogram" EntitySet="Trainingprogram" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="accesstokens">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="token" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="expires" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="created" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="CalcData">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Gender" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Height" Type="Decimal" Nullable="false" Precision="8" Scale="3" />
+          <Property Name="Age" Type="Int32" Nullable="false" />
+          <Property Name="Weight" Type="Decimal" Nullable="false" Precision="8" Scale="3" />
+          <Property Name="Activityfactor" Type="Decimal" Nullable="false" Precision="8" Scale="3" />
+          <Property Name="Fat" Type="Decimal" Precision="8" Scale="3" />
+          <Property Name="Carbs" Type="Decimal" Precision="8" Scale="3" />
+          <Property Name="Protein" Type="Decimal" Precision="8" Scale="3" />
+          <Property Name="KcalResult" Type="Decimal" Precision="8" Scale="3" />
+          <Property Name="KcalPlusMinus" Type="Decimal" Precision="8" Scale="3" />
+          <Property Name="created" Type="DateTime" Precision="3" />
+          <Property Name="RegID" Type="Int32" />
+          <NavigationProperty Name="UserRegistration" Relationship="TreningModel1.FK_CalcData_UserRegistration" FromRole="CalcData" ToRole="UserRegistration" />
+        </EntityType>
+        <EntityType Name="Chat">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Sender" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Reciever" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Message" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="created" Type="DateTime" Precision="3" />
+          <Property Name="RegID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="UserRegistration" Relationship="TreningModel1.FK_Chat_UserRegistration" FromRole="Chat" ToRole="UserRegistration" />
+        </EntityType>
+        <EntityType Name="Login">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Pasword" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Trainingprogram">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TrainingExperience" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Trainingdays" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Goals" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Trainingprogram1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="created" Type="DateTime" Precision="3" />
+          <Property Name="RegID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="UserRegistration" Relationship="TreningModel1.FK_Trainingprogram_UserRegistration" FromRole="Trainingprogram" ToRole="UserRegistration" />
+        </EntityType>
+        <EntityType Name="UserRegistration">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="created" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="CalcData" Relationship="TreningModel1.FK_CalcData_UserRegistration" FromRole="UserRegistration" ToRole="CalcData" />
+          <NavigationProperty Name="Chat" Relationship="TreningModel1.FK_Chat_UserRegistration" FromRole="UserRegistration" ToRole="Chat" />
+          <NavigationProperty Name="Trainingprogram" Relationship="TreningModel1.FK_Trainingprogram_UserRegistration" FromRole="UserRegistration" ToRole="Trainingprogram" />
+        </EntityType>
+        <Association Name="FK_CalcData_UserRegistration">
+          <End Type="TreningModel1.UserRegistration" Role="UserRegistration" Multiplicity="0..1" />
+          <End Type="TreningModel1.CalcData" Role="CalcData" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserRegistration">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CalcData">
+              <PropertyRef Name="RegID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Chat_UserRegistration">
+          <End Type="TreningModel1.UserRegistration" Role="UserRegistration" Multiplicity="1" />
+          <End Type="TreningModel1.Chat" Role="Chat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserRegistration">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Chat">
+              <PropertyRef Name="RegID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Trainingprogram_UserRegistration">
+          <End Type="TreningModel1.UserRegistration" Role="UserRegistration" Multiplicity="1" />
+          <End Type="TreningModel1.Trainingprogram" Role="Trainingprogram" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserRegistration">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Trainingprogram">
+              <PropertyRef Name="RegID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TreningModel1StoreContainer" CdmEntityContainer="TreningEntities1">
+          <EntitySetMapping Name="accesstokens">
+            <EntityTypeMapping TypeName="TreningModel1.accesstokens">
+              <MappingFragment StoreEntitySet="accesstokens">
+                <ScalarProperty Name="created" ColumnName="created" />
+                <ScalarProperty Name="expires" ColumnName="expires" />
+                <ScalarProperty Name="token" ColumnName="token" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CalcData">
+            <EntityTypeMapping TypeName="TreningModel1.CalcData">
+              <MappingFragment StoreEntitySet="CalcData">
+                <ScalarProperty Name="RegID" ColumnName="RegID" />
+                <ScalarProperty Name="created" ColumnName="created" />
+                <ScalarProperty Name="KcalPlusMinus" ColumnName="KcalPlusMinus" />
+                <ScalarProperty Name="KcalResult" ColumnName="KcalResult" />
+                <ScalarProperty Name="Protein" ColumnName="Protein" />
+                <ScalarProperty Name="Carbs" ColumnName="Carbs" />
+                <ScalarProperty Name="Fat" ColumnName="Fat" />
+                <ScalarProperty Name="Activityfactor" ColumnName="Activityfactor" />
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="Height" ColumnName="Height" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Chat">
+            <EntityTypeMapping TypeName="TreningModel1.Chat">
+              <MappingFragment StoreEntitySet="Chat">
+                <ScalarProperty Name="RegID" ColumnName="RegID" />
+                <ScalarProperty Name="created" ColumnName="created" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="Reciever" ColumnName="Reciever" />
+                <ScalarProperty Name="Sender" ColumnName="Sender" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Login">
+            <EntityTypeMapping TypeName="TreningModel1.Login">
+              <MappingFragment StoreEntitySet="Login">
+                <ScalarProperty Name="Pasword" ColumnName="Pasword" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Trainingprogram">
+            <EntityTypeMapping TypeName="TreningModel1.Trainingprogram">
+              <MappingFragment StoreEntitySet="Trainingprogram">
+                <ScalarProperty Name="RegID" ColumnName="RegID" />
+                <ScalarProperty Name="created" ColumnName="created" />
+                <ScalarProperty Name="Trainingprogram1" ColumnName="Trainingprogram" />
+                <ScalarProperty Name="Goals" ColumnName="Goals" />
+                <ScalarProperty Name="Trainingdays" ColumnName="Trainingdays" />
+                <ScalarProperty Name="TrainingExperience" ColumnName="TrainingExperience" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserRegistration">
+            <EntityTypeMapping TypeName="TreningModel1.UserRegistration">
+              <MappingFragment StoreEntitySet="UserRegistration">
+                <ScalarProperty Name="created" ColumnName="created" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

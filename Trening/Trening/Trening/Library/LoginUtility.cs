@@ -10,15 +10,16 @@ namespace Trening.Library
 {
     public class LoginUtility
     {
-        private TreningEntities2 db = new TreningEntities2();
+        private TreningEntities db = new TreningEntities();
 
         public string Login(string username, string password)
         {
-            var user = db.Registration.Where(u => u.Email == username).FirstOrDefault<Registration>();
+            //        db.Registration.Where
+            var user = db.Login.Where(u => u.Email == username).FirstOrDefault<Login>();
 
             if (user != null)
             {
-                if (user.Password == password)
+                if (user.Pasword == password)
                 {
                     return CreateTokenString(username);
                 }

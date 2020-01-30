@@ -1,0 +1,98 @@
+﻿@model Trening.Models.UserValues
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>UserValues</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Height)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Height)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Age)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Age)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Weight)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Weight)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Activityfactor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Activityfactor)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Trainingexperience)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Trainingexperience)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.KcalResult)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.KcalResult)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Kcalplusminus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Kcalplusminus)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Login.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Login.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Login1.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Login1.Email)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

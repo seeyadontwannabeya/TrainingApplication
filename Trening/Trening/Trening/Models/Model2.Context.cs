@@ -13,10 +13,10 @@ namespace Trening.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class TreningEntities2 : DbContext
+    public partial class TreningEntities1 : DbContext
     {
-        public TreningEntities2()
-            : base("name=TreningEntities2")
+        public TreningEntities1()
+            : base("name=TreningEntities1")
         {
         }
     
@@ -25,10 +25,11 @@ namespace Trening.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Registration> Registration { get; set; }
-        public virtual DbSet<AdminMessage> AdminMessage { get; set; }
-        public virtual DbSet<Application> Application { get; set; }
-        public virtual DbSet<Message> Message { get; set; }
         public virtual DbSet<accesstokens> accesstokens { get; set; }
+        public virtual DbSet<CalcData> CalcData { get; set; }
+        public virtual DbSet<Chat> Chat { get; set; }
+        public virtual DbSet<Login> Login { get; set; }
+        public virtual DbSet<Trainingprogram> Trainingprogram { get; set; }
+        public virtual DbSet<UserRegistration> UserRegistration { get; set; }
     }
 }

@@ -12,19 +12,10 @@ namespace Trening.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Registration
+    public partial class Login
     {
         public int ID { get; set; }
         public string Email { get; set; }
-        public string Password { get; set; }
-        public string Gender { get; set; }
-        public Nullable<decimal> Height { get; set; }
-        public Nullable<int> Age { get; set; }
-        public Nullable<decimal> Weight { get; set; }
-        public Nullable<decimal> Activity { get; set; }
-        public string TrainingExperience { get; set; }
-        public string Questions { get; set; }
-        public string Trainingdays { get; set; }
-        public string Goals { get; set; }
+        public string Pasword { get; set; }
     }
 }

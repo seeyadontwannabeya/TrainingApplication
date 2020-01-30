@@ -28,7 +28,9 @@
     <br />
     <br />
 
-    <h3>Aim/Goal</h3>
+    <button type="submit" @click="say(trainingexperience, trainingdays)">Submit</button>
+
+    <!--<h3>Aim/Goal</h3>
 
     <input type="radio" id="getstrong" value="Get strong" v-model="goals" />
     <label for="getstrong">Do you want to get stronger?</label>
@@ -44,7 +46,7 @@
 
     <br />
     <input type="radio" id="buildmuscle" value="Build muscle" v-model="goals" />
-    <label for="buildmuscle">swole?</label>
+    <label for="buildmuscle">Bigger?</label>
     <br />
 
     <br />
@@ -58,7 +60,7 @@
     <br />
     <textarea id="message" value="{message}" v-model="message" placeholder="skriv nåt" />
 
-    <button type="submit" @click="say(message, trainingexperience)">Submit</button>
+    <button type="submit" @click="say(message, trainingexperience)">Submit</button>-->
   </div>
 </template>
 
@@ -67,19 +69,18 @@ import axios from "axios";
 
 export default {
   methods: {
-    say: function(message, trainingexperience, trainingdays, goals) {
-      console.log(message);
+    say: function(trainingexperience, trainingdays) {
+      console.log(trainingdays);
       axios
-        .post("https://localhost:44332/api/Applications", {
-          ID: 6,
+        .post("https://localhost:44368/api/Trainingprograms", {
           TrainingExperience: trainingexperience,
-          TrainingDays: trainingdays,
-          Questions: message,
-          Goals: goals
+          Trainingdays: trainingdays,
+          Goals: ""
         })
         .then(response => {
           this.success = "Data saved successfully";
           this.response = JSON.stringify(response, null, 2);
+          console.log(JSON.stringify(response.data));
         })
         .catch(error => {
           this.response = "Error: " + error.response.status;
@@ -93,9 +94,7 @@ export default {
   data: function() {
     return {
       trainingexperience: "",
-      trainingdays: "",
-      message: "",
-      goals: ""
+      trainingdays: ""
     };
   }
 };

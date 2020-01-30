@@ -12,11 +12,16 @@ namespace Trening.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Message
+    public partial class Trainingprogram
     {
         public int ID { get; set; }
-        public string Message1 { get; set; }
-        public Nullable<System.DateTime> Date { get; set; }
-        public string Email { get; set; }
+        public string TrainingExperience { get; set; }
+        public string Trainingdays { get; set; }
+        public string Goals { get; set; }
+        public string Trainingprogram1 { get; set; }
+        public Nullable<System.DateTime> created { get; set; }
+        public int RegID { get; set; }
+    
+        public virtual UserRegistration UserRegistration { get; set; }
     }
 }
